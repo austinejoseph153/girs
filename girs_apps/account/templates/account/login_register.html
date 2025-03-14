@@ -1,0 +1,110 @@
+{% extends "frontend/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+    <div id="wrapper">
+        <div class="content">
+            <!--register form -->
+            <div class="main-register-wrap">
+                <div class="container" style="margin-top: 40px;">
+                    {% if messages %}
+                        <div class="message-container" id="alert_message">
+                            {% for message in messages %}
+                                <div class="notification {{message.tags}} fl-wrap">
+                                    <p>{{ message }}</p>
+                                    <a class="notification-close" href="#"><i class="fa fa-times"></i></a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="main-register-holder">
+                    <div class="main-register fl-wrap">
+                        <h3>Welcome to <span>City<strong>Book</strong></span></h3>
+                        <div id="tabs-container">
+                            <ul class="tabs-menu">
+                                <li class="current"><a href="#tab-1">Login</a></li>
+                                <li><a href="#tab-2">Register</a></li>
+                            </ul>
+                            <div class="tab">
+                                <div id="tab-1" class="tab-content">
+                                    <div class="custom-form">
+                                        <form method="post"  name="registerform" action="{% url 'account:login_register' %}">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value="login">
+                                            <div class="form-group">
+                                                <label>Email*</label>
+                                                {{login_form.email}}
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Password * </label>
+                                                {{login_form.password}}
+                                            </div>
+                                            <div>
+                                                <button type="submit" class="log-submit-btn"><span>Log In</span></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab">
+                                    <div id="tab-2" class="tab-content">
+                                        <div class="custom-form">
+                                            <form method="post" name="registerform" class="main-register-form" id="main-register-form2" action="{% url 'account:login_register' %}" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label >First Name *</label>
+                                                    {{user_form.firstname}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Last Name *</label>
+                                                    {{user_form.lastname}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email Address *</label>
+                                                    {{user_form.email}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Phone *</label>
+                                                    {{user_form.phone}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>City *</label>
+                                                    {{user_form.city}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Address *</label>
+                                                    {{user_form.address}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Image *</label>
+                                                    {{user_form.image}}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label >Password *</label>
+                                                    {{user_form.password}}
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="log-submit-btn"  ><span>Register</span></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--register form end -->
+        </div>
+    </div>
+    
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        $(".message-container .btn-close").on("click", function(){
+            $(this).closest(".message-container").hide()
+        })
+    </script>
+{% endblock %}

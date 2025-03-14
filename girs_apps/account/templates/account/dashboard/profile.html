@@ -1,0 +1,106 @@
+{% extends "frontend/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+    <!-- wrapper -->	
+    <div id="wrapper">
+        <!--content -->  
+        <div class="content">
+            <!--section --> 
+            <section>
+                <!-- container -->
+                <div class="container">
+                    <!-- profile-edit-wrap -->
+                    <div class="profile-edit-wrap">
+                        <div class="profile-edit-page-header">
+                            <h2>Edit profile</h2>
+                            <div class="breadcrumbs"><a href="{% url 'pages:index' %}">Home</a><a href="{% url 'account:user_dashboard' %}">Dashboard</a><span>Edit profile</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="fixed-bar fl-wrap">
+                                    <div class="user-profile-menu-wrap fl-wrap">
+                                        <!-- user-profile-menu-->
+                                        <div class="user-profile-menu">
+                                            <h3>Main</h3>
+                                            <ul>
+                                                <li><a href="{% url 'account:user_dashboard' %}" class="user-profile-act"><i class="fa fa-gears"></i>Dashboard</a></li>
+                                                <li><a href="{% url 'account:user_profile' %}"><i class="fa fa-user-o"></i> Edit profile</a></li>
+                                                <li><a href="{% url 'account:change_password' %}"><i class="fa fa-unlock-alt"></i>Change Password</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- user-profile-menu end-->
+                                        <!-- user-profile-menu-->
+                                        <div class="user-profile-menu">
+                                            <h3>Listings</h3>
+                                            <ul>
+                                                <li><a href="{% url 'account:my_listings' %}"><i class="fa fa-th-list"></i> My listings</a></li>
+                                                <li><a href="{% url 'account:add_listings' %}"><i class="fa fa-plus-square-o"></i> Add New</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- user-profile-menu end-->                                        
+                                        <a href="#" class="log-out-btn">Log Out</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <!-- profile-edit-container--> 
+                                <div class="profile-edit-container">
+                                    <div class="profile-edit-header fl-wrap">
+                                        <h4>My Account</h4>
+                                    </div>
+                                    <div class="custom-form">
+                                        <div class="form-group">
+                                            <label>FirstName <i class="fa fa-user-o"></i></label>
+                                            <input type="text" placeholder="{{user.firstname}}" value="{{user.firstname}}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>LastName <i class="fa fa-user-o"></i></label>
+                                            <input type="text" placeholder="{{user.lastname}}" value="{{user.lastname}}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email Address<i class="fa fa-envelope-o"></i>  </label>
+                                            <input type="text" placeholder="{{user.email}}" value="{{user.email}}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone<i class="fa fa-phone"></i>  </label>
+                                            <input type="text" placeholder="{{user.phone}}" value="{{user.phone}}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label> City <i class="fa fa-map-marker"></i>  </label>
+                                            <input type="text" placeholder="{{user.city}}" value="{{user.city}}"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label> Address <i class="fa fa-map-marker"></i>  </label>
+                                            <input type="text" placeholder="{{user.address}}" value="{{user.address}}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- profile-edit-container end-->                                         
+                            </div>
+                            <div class="col-md-2">
+                                <div class="edit-profile-photo fl-wrap">
+                                    <img src="{% static 'images/avatar/4.jpg' %}" class="respimg" alt="">
+                                    <div class="change-photo-btn">
+                                        <div class="photoUpload">
+                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                            <input type="file" class="upload">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--profile-edit-wrap end -->
+                </div>
+                <!--container end -->
+            </section>
+            <!-- section end -->
+            <div class="limit-box fl-wrap"></div>
+        </div>
+    </div>
+    <!-- wrapper end -->
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

@@ -1,0 +1,89 @@
+{% load static i18n %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %} {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="index, follow"/>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <!--=============== css  ===============-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/plugins.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/color.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %} {% endblock %}
+    <!--=============== favicons ===============-->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+</head>
+<body>
+    <!--loader-->
+    <div class="loader-wrap">
+        <div class="pin"></div>
+        <div class="pulse"></div>
+    </div>
+    <!--loader end-->
+
+    <!-- Header Start -->
+    {% include 'frontend/layouts/header.html' %}
+    <!-- Header End -->
+    
+    {% block content %}
+
+    {% endblock %}
+
+    <!-- Footer Start -->
+    {% include 'frontend/layouts/footer.html' %}
+    <!-- Footer End -->
+
+
+    <a class="to-top"><i class="fa fa-angle-up"></i></a>
+
+    <!--=============== scripts  ===============-->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwJSRi0zFjDemECmFl9JtRj1FY7TiTRRo&amp;libraries=places&amp;callback=initAutocomplete"></script>
+    <script>
+        const csrftoken = "{{csrf_token}}";
+        
+        function check_user_authentication(){
+            $.ajax({
+                type:'GET',
+                url:"{% url 'account:user_is_authenticated' %}",
+                beforeSend: function(request){
+                    request.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                data:{
+                    csrfmiddlewaretoken: csrftoken
+                },
+                success:function(response){
+                    if(response["is_authenticated"] == true){
+                        $("#header-user-menu").show()
+                        name = response["name"]
+                        image_url = response["image_url"]
+                        if(image_url){
+                            content = `<span><img src="${image_url}" alt=""></span> hello ${name}`
+                        }else{
+                            content = `<span><img src="{% static 'images/avatar/4.jpg' %}" alt=""></span> hello ${name}`
+                        }
+                        $("#header-user-name").html(content)
+                        $(".show-reg-form").hide()
+                    }else{
+                        $("#header-user-menu").hide()
+                    }
+                },
+                error: function(response){
+                    
+                }
+            })
+        }
+
+        $(document).ready(function(){
+            check_user_authentication()
+        })
+    </script>
+    {% block extra_js %} {% endblock %}
+</body>
+</html>

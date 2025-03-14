@@ -1,0 +1,100 @@
+{% extends "frontend/base.html" %}
+{% load static i18n %}
+
+{% block extra_css %}
+    <style>
+        #location_id, #category_name{
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="wrapper">
+        <div class="content">
+            <!--section -->
+            <section class="scroll-con-sec hero-section" data-scrollax-parent="true" id="sec1">
+                <div class="bg"  data-bg="{% static 'images/bg/12.jpg' %}" data-scrollax="properties: { translateY: '200px' }"></div>
+                <div class="overlay"></div>
+                <div class="hero-section-wrap fl-wrap">
+                    <div class="container">
+                        <div class="intro-item fl-wrap">
+                            <h2>We will help you to find all</h2>
+                            <h3>Find great places , hotels , churches , schools in benue state markurdi.</h3>
+                        </div>
+                        <div class="main-search-input-wrap">
+                            <form action="{% url 'pages:map_page' %}" method="GET">
+                                <div class="main-search-input fl-wrap">
+                                    <div class="main-search-input-item">
+                                        <select data-placeholder="All Categories" class="" name="category" id="category_name" required>
+                                            {% for category in location_categories %}
+                                                <option value="{{category}}">{{category}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="main-search-input-item">
+                                        <select class="" name="location_id" id="location_id" required>
+                                            
+                                        </select>
+                                    </div>
+                                    <button class="main-search-button" type="submit">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section end -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        function get_locations(category){
+            if(category){
+                $.ajax({
+                    type:'GET',
+                    url:"{% url 'pages:filter_locations' %}",
+                    beforeSend: function(request){
+                        request.setRequestHeader("X-CSRFToken", csrftoken);
+                    },
+                    data:{
+                        csrfmiddlewaretoken: csrftoken,
+                        category:category
+                    },
+                    success:function(response){
+                        $("#location_id").html("")
+                        locations = response["locations"]
+                        if(locations.length > 0){
+                            $('#location_id').append('<option value="">Select your location*</option>');
+                            for(var location in locations){
+                                $('#location_id').append($('<option>', {
+                                    value: response["locations"][location].pk,
+                                    text: response["locations"][location].name 
+                                }));
+                            }
+                        }else{
+                            $('#location_id').append('<option value="">Nothing found</option>');
+                        }
+                    },
+                    error: function(response){
+                        console.log("something went wrong")
+                    }
+                })
+            }
+        }
+
+        $(document).ready(function(){
+            get_locations($("#category_name").val())
+        })
+        
+        $("#category_name").on("change", function(){
+            get_locations($(this).val())   
+        })
+    </script>
+{% endblock %}

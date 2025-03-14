@@ -1,0 +1,17 @@
+{% extends "frontend/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+    <!-- wrapper -->
+    <div id="wrapper">
+        <div class="content">
+            <!-- Map -->
+            <div class="map-container fw-map">
+                {{ map|safe }}
+            </div>
+            <!-- Map end -->
+        </div>
+        <!-- content end-->
+    </div>
+    <!-- wrapper end -->
+{% endblock %}

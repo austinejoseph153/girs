@@ -1,0 +1,99 @@
+{% extends "frontend/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+    <!-- wrapper -->	
+    <div id="wrapper">
+        <!--content -->  
+        <div class="content">
+            <!--section --> 
+            <section id="sec1">
+                <!-- container -->
+                <div class="container">
+                    <!-- profile-edit-wrap -->
+                    <div class="profile-edit-wrap">
+                        <div class="profile-edit-page-header">
+                            <h2>My Listings </h2>
+                            <div class="breadcrumbs"><a href="{% url 'pages:index' %}">Home</a><a href="{% url 'account:user_dashboard' %}">Dashboard</a><span>Listings</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if messages %}
+                                    <div class="message-container" id="alert_message">
+                                        {% for message in messages %}
+                                            <div class="notification {{message.tags}} fl-wrap">
+                                                <p>{{ message }}</p>
+                                                <a class="notification-close" href="#"><i class="fa fa-times"></i></a>
+                                            </div>                                                
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                <div class="fixed-bar fl-wrap">
+                                    <div class="user-profile-menu-wrap fl-wrap">
+                                        <!-- user-profile-menu-->
+                                        <div class="user-profile-menu">
+                                            <h3>Main</h3>
+                                            <ul>
+                                                <li><a href="{% url 'account:user_dashboard' %}" class="user-profile-act"><i class="fa fa-gears"></i>Dashboard</a></li>
+                                                <li><a href="{% url 'account:user_profile' %}"><i class="fa fa-user-o"></i> Edit profile</a></li>
+                                                <li><a href="{% url 'account:change_password' %}"><i class="fa fa-unlock-alt"></i>Change Password</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- user-profile-menu end-->
+                                        <!-- user-profile-menu-->
+                                        <div class="user-profile-menu">
+                                            <h3>Listings</h3>
+                                            <ul>
+                                                <li><a href="{% url 'account:my_listings' %}"><i class="fa fa-th-list"></i> My listings</a></li>
+                                                <li><a href="{% url 'account:add_listings' %}"><i class="fa fa-plus-square-o"></i> Add New</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- user-profile-menu end-->                                        
+                                        <a href="#" class="log-out-btn">Log Out</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="dashboard-list-box fl-wrap">
+                                    <div class="dashboard-header fl-wrap">
+                                        <h3>My listings</h3>
+                                    </div>
+                                    {% for location in locations %}
+                                        <!-- dashboard-list end-->    
+                                        <div class="dashboard-list">
+                                            <div class="dashboard-message">
+                                                <div class="dashboard-listing-table-image">
+                                                    <img src="{{location.image.url}}" alt="">
+                                                </div>
+                                                <div class="dashboard-listing-table-text">
+                                                    <h4>{{location.name}}</h4>
+                                                    <h4>{{location.category}}</h4>
+                                                    <span class="dashboard-listing-table-address"><i class="fa fa-map-marker"></i>Nigeria, benue state markurdi</span>
+                                                    <ul class="dashboard-listing-table-opt  fl-wrap">
+                                                        <!-- <li><a href="#">Edit <i class="fa fa-pencil-square-o"></i></a></li> -->
+                                                        <li><a href="{% url 'account:delete_listing' id=location.pk %}" class="del-btn">Delete <i class="fa fa-trash-o"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- dashboard-list end-->
+                                    {% endfor %}       
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--profile-edit-wrap end -->
+                </div>
+                <!--container end -->
+            </section>
+            <!-- section end -->
+            <div class="limit-box fl-wrap"></div>
+        </div>
+    </div>
+    <!-- wrapper end -->
+{% endblock %}
+
+{% block extra_js %}
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "frontend/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+    <!-- wrapper -->	
+    <div id="wrapper">
+        <!--content -->  
+        <div class="content">
+            <!--section --> 
+            <section id="sec1">
+                <!-- container -->
+                <div class="container">
+                    <!-- profile-edit-wrap -->
+                    <div class="profile-edit-wrap">
+                        <div class="profile-edit-page-header">
+                            <h2>Admin Panel</h2>
+                            <div class="breadcrumbs"><a href="{% url 'pages:index' %}">Home</a><span>Dashboard</span></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="fixed-bar fl-wrap">
+                                    <div class="user-profile-menu-wrap fl-wrap">
+                                        <!-- user-profile-menu-->
+                                        <div class="user-profile-menu">
+                                            <h3>Main</h3>
+                                            <ul>
+                                                <li><a href="{% url 'account:user_dashboard' %}" class="user-profile-act"><i class="fa fa-gears"></i>Dashboard</a></li>
+                                                <li><a href="{% url 'account:user_profile' %}"><i class="fa fa-user-o"></i> Edit profile</a></li>
+                                                <li><a href="{% url 'account:change_password' %}"><i class="fa fa-unlock-alt"></i>Change Password</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- user-profile-menu end-->
+                                        <!-- user-profile-menu-->
+                                        <div class="user-profile-menu">
+                                            <h3>Listings</h3>
+                                            <ul>
+                                                <li><a href="{% url 'account:my_listings' %}"><i class="fa fa-th-list"></i> My listings</a></li>
+                                                <li><a href="{% url 'account:add_listings' %}"><i class="fa fa-plus-square-o"></i> Add New</a></li>
+                                            </ul>
+                                        </div>
+                                        <!-- user-profile-menu end-->                                        
+                                        <a href="{% url 'account:user_logout' %}" class="log-out-btn">Log Out</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <!-- profile-edit-container--> 
+                                <div class="profile-edit-container">
+                                    <div class="profile-edit-header fl-wrap" style="margin-top:30px">
+                                        <h4>Hello , <span>{{user.firstname}}</span> welcome back</h4>
+                                    </div>
+                                    
+                                    <!-- <div class="notification success fl-wrap">
+                                        <p>Your listing <a href="#">Fitness Center Brooklyn</a> has been approved!</p>
+                                        <a class="notification-close" href="#"><i class="fa fa-times"></i></a>
+                                    </div>                                             -->
+                                    
+                                    <!-- statistic-container--> 
+                                    <div class="statistic-container fl-wrap">
+                                        <!-- statistic-item-wrap--> 
+                                        <div class="statistic-item-wrap"> 
+                                            <div class="statistic-item gradient-bg fl-wrap">
+                                                <i class="fa fa-map-marker"></i>
+                                                <div class="statistic-item-numder">{{ user_listings }}</div>
+                                                <h5>Active Listings</h5>
+                                            </div>
+                                        </div>
+                                        <!-- statistic-item-wrap end-->                                            
+                                        <!-- statistic-item-wrap--> 
+                                        <div class="statistic-item-wrap"> 
+                                            <div class="statistic-item gradient-bg fl-wrap">
+                                                <i class="fa fa fa-eye"></i>
+                                                <div class="statistic-item-numder">{{ user_listings }}</div>
+                                                <h5>Listing Views</h5>
+                                            </div>
+                                        </div>
+                                        <!-- statistic-item-wrap end-->                                               
+                                    </div>
+                                     <!-- statistic-container end--> 
+                                </div>
+                                <!-- profile-edit-container end-->                                        
+                            </div>
+                        </div>
+                    </div>
+                    <!--profile-edit-wrap end -->
+                </div>
+                <!--container end -->
+            </section>
+            <!-- section end -->
+            <div class="limit-box fl-wrap"></div>
+        </div>
+    </div>
+    <!-- wrapper end -->
+{% endblock %}
+    
+{% block extra_js %}
+{% endblock %}
