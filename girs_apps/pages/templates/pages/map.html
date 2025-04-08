@@ -10,6 +10,22 @@
                 {{ map|safe }}
             </div>
             <!-- Map end -->
+            
+            <!-- location info starts -->
+             <div class="location-info" style="padding: 20px;">
+                <h1 style="text-align: left; font-weight: bold;">Location information</h1>
+                <table>
+                    <tbody>
+                        {% for key, value in location_info.items %}
+                            <tr>
+                                <td><span>{{key}}</span></td>
+                                <td><span>{{value}}</span></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+             </div>
+            <!-- location info ends -->
         </div>
         <!-- content end-->
     </div>

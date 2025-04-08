@@ -7,6 +7,7 @@ import folium.raster_layers
 from .models import Location
 from django.http import HttpResponseNotAllowed, JsonResponse
 from .models import LocationCategory, Location
+from .utils import get_location_info
 
 # geolocator = Nominatim(user_agent="austine")
 # location = geolocator.reverse("7.7288104,8.5535186")
@@ -35,7 +36,7 @@ class MapTemplateView(TemplateView):
         m = folium.Map(
                         location=coordinates,
                         control_scale=True,
-                        zoom_start=12,
+                        zoom_start=15,
                         height='100%',
                        )
         folium.FeatureGroup(name="Icon collection", control=False).add_to(m)
@@ -45,13 +46,12 @@ class MapTemplateView(TemplateView):
         folium.Marker(location=coordinates, popup=location.name).add_to(m)
         folium.LayerControl().add_to(m)
 
+        # get info about the location
+        location_info = get_location_info(location.latitude, location.longitude)
+        context["location_info"] = location_info
         context["map"] = m._repr_html_()
         return context
     
-    # def post(self, request, **kwargs): 
-    #     context = {}
-    #     return super(MapTemplateView, self).render_to_response(context)
-
 def get_locations_by_category(request):
     category = request.GET.get("category")
     location_list = []

@@ -3632,6 +3632,7 @@ article .list-single-main-item {
 }
 .fw-map {
 	height:600px;
+	margin-bottom: 30px;
 }
 .map-container.column-map {
 	width:50%;
@@ -6659,6 +6660,21 @@ footer.main-footer.fixed-footer {
     letter-spacing: 0em;
     width: 170px;
 }
+
+.location-info{
+	padding: 20px;
+}
+.location-info h4{
+	text-align: left;
+}
+.location-info table{
+	width: 50%;
+}
+.location-info table tr td{
+	border-bottom: 1px solid  rgba(0, 0, 0, 0.2);
+	padding: 7px;
+	text-align: left;
+}
 @media only screen and  (max-width: 900px) {
 .booking-modal-content {
 	padding-right:0;
@@ -6883,6 +6899,9 @@ section.list-single-section {
 .gallery-item , #progressbar li {
 	width:50%;
 }
+.fw-map{
+	height: auto;
+}
 #progressbar li {
 	margin-bottom:16px;
 }
@@ -6918,6 +6937,9 @@ section.list-single-section {
     padding: 14px 20px 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 0px 10px rgba(255,255,255,0.0);
+}
+.location-info table{
+	width: 100%;
 }
 .main-search-input-item {
     width: 100%;
