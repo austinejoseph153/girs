@@ -28,6 +28,9 @@
                         </div>
                         <div class="main-search-input-wrap">
                             <form action="{% url 'pages:map_page' %}" method="GET">
+                                {% csrf_token %}
+                                <input type="hidden" name="user_latitude" value="" id="user_latitude">
+                                <input type="hidden" name="user_longitude" value="" id="user_longitude">
                                 <div class="main-search-input fl-wrap">
                                     <div class="main-search-input-item">
                                         <select data-placeholder="All Categories" class="" name="category" id="category_name" required>
@@ -95,6 +98,12 @@
         
         $("#category_name").on("change", function(){
             get_locations($(this).val())   
+        })
+        navigator.geolocation.getCurrentPosition((position)=>{
+            const latitude = position.coords.latitude
+            const longitude = position.coords.longitude
+            $("#user_latitude").val(latitude)  
+            $("#user_longitude").val(longitude)
         })
     </script>
 {% endblock %}

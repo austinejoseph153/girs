@@ -31,20 +31,26 @@ class MapTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(MapTemplateView, self).get_context_data(**kwargs)
         location = Location.objects.get(pk=self.request.GET.get("location_id"))
-        coordinates = [str(location.latitude), str(location.longitude)]
-        # coordinates = [41.850030, -87.650050]
+        start_coordinates = [str(location.latitude), str(location.longitude)]
+        user_latitude = self.request.GET.get("user_latitude", None)
+        user_longitude = self.request.GET.get("user_longitude", None)
+        if user_latitude and user_longitude:
+            end_coordinates = [7.73375000, 8.52139000]
+        # test_coordinates = [41.850030, -87.650050]
         m = folium.Map(
-                        location=coordinates,
-                        control_scale=True,
-                        zoom_start=15,
+                        location=start_coordinates,
+                        # control_scale=True,
+                        zoom_start=12,
                         height='100%',
                        )
-        folium.FeatureGroup(name="Icon collection", control=False).add_to(m)
+        # folium.FeatureGroup(name="Icon collection", control=False).add_to(m)
 
         # different kind of layers
 
-        folium.Marker(location=coordinates, popup=location.name).add_to(m)
-        folium.LayerControl().add_to(m)
+        folium.Marker(location=start_coordinates, popup="Start Location" , icon=folium.Icon(color="green")).add_to(m)
+        folium.Marker(location=end_coordinates, popup="End Location" , icon=folium.Icon(color="red")).add_to(m)
+        # folium.PolyLine([start_coordinates, end_coordinates], color="blue").add_to(m)
+        # folium.LayerControl().add_to(m)
 
         # get info about the location
         location_info = get_location_info(location.latitude, location.longitude)
