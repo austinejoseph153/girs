@@ -10,7 +10,7 @@ SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
     default="django-insecure-g(bfc=+_rty%@0&$c7%du_gs@k2o!m1+i09chxru1_+g^fpw8&",
 )
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "192.168.95.138"]
 
 # CACHES
 # ------------------------------------------------------------------------------

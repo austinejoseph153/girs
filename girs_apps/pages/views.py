@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 import folium
-import json
+import json, requests
 from geopy.geocoders import Nominatim
 import folium.raster_layers
 from .models import Location
@@ -34,8 +34,12 @@ class MapTemplateView(TemplateView):
         start_coordinates = [str(location.latitude), str(location.longitude)]
         user_latitude = self.request.GET.get("user_latitude", None)
         user_longitude = self.request.GET.get("user_longitude", None)
-        if user_latitude and user_longitude:
-            end_coordinates = [7.73375000, 8.52139000]
+        # public_ip = requests.get("https://api.ipify.org")
+        # public_ip = "10.250.228.80"
+        # response = requests.get("http://ip-api.com/json").json()
+        # print(response)
+        # if user_latitude and user_longitude:
+        end_coordinates = [7.73375000, 8.52139000]
         # test_coordinates = [41.850030, -87.650050]
         m = folium.Map(
                         location=start_coordinates,

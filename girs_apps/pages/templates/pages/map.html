@@ -13,6 +13,9 @@
             
             <!-- location info starts -->
              <div class="location-info" style="padding: 20px;">
+                {% if location.image %}
+                    <img src="{{ location.image.url }}" alt="">
+                {% endif %}
                 <h1 style="text-align: left; font-weight: bold;">Location information</h1>
                 <table>
                     <tbody>
