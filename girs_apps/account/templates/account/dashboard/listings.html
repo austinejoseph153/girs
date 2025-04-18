@@ -65,7 +65,11 @@
                                         <div class="dashboard-list">
                                             <div class="dashboard-message">
                                                 <div class="dashboard-listing-table-image">
-                                                    <img src="{{location.image.url}}" alt="">
+                                                    {% if location.image %}
+                                                        <img src="{{location.image.url}}" alt="">
+                                                    {% else %}
+                                                        <img src="{% static 'images/img-2.jpg' %}" alt="">
+                                                    {% endif %}
                                                 </div>
                                                 <div class="dashboard-listing-table-text">
                                                     <h4>{{location.name}}</h4>
