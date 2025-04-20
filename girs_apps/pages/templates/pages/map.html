@@ -14,11 +14,21 @@
             <!-- location info starts -->
              <div class="location-info" style="padding: 20px;">
                 {% if location.image %}
-                    <img src="{{ location.image.url }}" alt="">
+                    <img src="{{ location.image.url }}" alt="" class="mb-3">
                 {% endif %}
                 <h1 style="text-align: left; font-weight: bold;">Location information</h1>
                 <table>
                     <tbody>
+                        <tr>
+                            <td><span>Description</span></td>
+                            <td>
+                                {% if location.description %}
+                                    <span>{{location.description}}</span>
+                                {% else %}
+                                    <span>No description available</span>
+                                {% endif %}
+                            </td>
+                        </tr>
                         {% for key, value in location_info.items %}
                             <tr>
                                 <td><span>{{key}}</span></td>
