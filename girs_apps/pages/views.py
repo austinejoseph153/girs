@@ -44,7 +44,7 @@ class MapTemplateView(TemplateView):
         m = folium.Map(
                         location=start_coordinates,
                         control_scale=True,
-                        zoom_start=13,
+                        zoom_start=12,
                         height='100%',
                        )
         folium.FeatureGroup(name="Icon collection", control=False).add_to(m)
@@ -53,7 +53,7 @@ class MapTemplateView(TemplateView):
 
         folium.Marker(location=start_coordinates, popup="Bsu markurdi" , icon=folium.Icon(color="red")).add_to(m)
         folium.Marker(location=end_coordinates, popup=location.name , icon=folium.Icon(color="green")).add_to(m)
-        folium.PolyLine([start_coordinates, end_coordinates], color="blue").add_to(m)
+        # folium.PolyLine([start_coordinates, end_coordinates], color="blue").add_to(m)
         folium.LayerControl().add_to(m)
 
         # get info about the location
